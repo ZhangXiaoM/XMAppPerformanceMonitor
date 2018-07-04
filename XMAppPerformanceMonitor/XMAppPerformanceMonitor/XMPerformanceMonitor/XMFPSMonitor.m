@@ -14,7 +14,6 @@
 @property (nonatomic, assign) NSTimeInterval lastTamp;
 @property (nonatomic, assign) NSInteger count;
 @property (nonatomic, assign) BOOL isMonitoring;
-
 @end
 
 @implementation XMFPSMonitor
@@ -50,6 +49,7 @@ static dispatch_queue_t sharedQueue() {
 - (void)tick:(CADisplayLink *)link {
     
     __weak typeof(self) weakSelf = self;
+    // 计算在子线程执行，减少主线程拥塞
     dispatch_async(sharedQueue(), ^{
         // 主线程不会访问和修改临界区内容
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -73,6 +73,7 @@ static dispatch_queue_t sharedQueue() {
         self.isMonitoring = YES;
         XMWeakTarget *weakTarget = [[XMWeakTarget alloc] initWithTarget:self selector:@selector(tick:)];
         self.link = [CADisplayLink displayLinkWithTarget:weakTarget selector:@selector(timerFire:)];
+        // 页面的绘制在主线程执行，因此 link 只能添加到主线程的 runLoop
         [self.link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
 }

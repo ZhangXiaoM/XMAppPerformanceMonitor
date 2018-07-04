@@ -81,6 +81,7 @@ float cpuUsage() {
     double usageRatio = 0;
     thread_info_data_t thinfo;
     thread_act_array_t threads;
+    // 由内核提供的该进程内线程的信息，包括：运行时间、运行状态、CPU 用量、睡眠时间等
     thread_basic_info_t basic_info_t;
     mach_msg_type_number_t count = 0;
     mach_msg_type_number_t thread_info_count = THREAD_INFO_MAX;

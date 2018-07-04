@@ -13,9 +13,9 @@
 #import "XMMemoryMonitor.h"
 
 @interface SecondViewController () <UITableViewDelegate, UITableViewDataSource>
+
 @property (nonatomic, strong) UITableView *table;
-//@property (nonatomic, strong) XMFPSMonitor *fps;
-@property (nonatomic, strong) XMCPUMonitor *cpu;
+
 @end
 
 @implementation SecondViewController
@@ -28,14 +28,14 @@
     self.table.dataSource = self;
     [self.view addSubview:self.table];
 
-    [[XMFPSMonitor sharedMonitor] startMonitor];
+//    [[XMFPSMonitor sharedMonitor] startMonitor];
 //    [[XMCPUMonitor sharedMonitor] startMonitor];
 //    [[XMMemoryMonitor sharedMonitor] startMonitor];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [[XMFPSMonitor sharedMonitor] stopMonitor];
+//    [[XMFPSMonitor sharedMonitor] stopMonitor];
 //    [[XMCPUMonitor sharedMonitor] stopMonitor];
 //    [[XMMemoryMonitor sharedMonitor] stopMonitor];
 }

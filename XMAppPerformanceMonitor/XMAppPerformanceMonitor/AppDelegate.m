@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "XMCPUMonitor.h"
+#import "XMFPSMonitor.h"
+#import "XMMemoryMonitor.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +20,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[XMFPSMonitor sharedMonitor] startMonitor];
+    [[XMCPUMonitor sharedMonitor] startMonitor];
+    [[XMMemoryMonitor sharedMonitor] startMonitor];
+    
     return YES;
 }
 

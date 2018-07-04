@@ -20,7 +20,6 @@ typedef struct XMMemoryUsage {
     double hasUsage;
     double total;
     double ratio;
-    
 } XMMemoryUsage;
 
 
@@ -35,6 +34,13 @@ typedef struct XMMemoryUsage {
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
+
+/********************************************
+ * 监听整个 APP 生命周期的内存情况
+ * 用一个常驻内存的共享队列来处理，
+ * 内存的计算和处理，以及定时器都是常驻线程处理，不会阻塞主线程，
+ * 也不好影响 APP 性能
+ *********************************************/
 
 static dispatch_queue_t sharedQueue() {
     static dispatch_queue_t queue = nil;
@@ -85,6 +91,7 @@ static dispatch_queue_t sharedQueue() {
 }
 
 XMMemoryUsage memoryUsage() {
+    // 由内核提供的关于该进程的内存信息，包括虚拟内存，常驻内存，物理内存，最大常驻内存等
     struct mach_task_basic_info info;
     mach_msg_type_number_t count = sizeof(info) / sizeof(integer_t);
     if (task_info(mach_task_self(), MACH_TASK_BASIC_INFO, (task_info_t)&info, &count) == KERN_SUCCESS) {
