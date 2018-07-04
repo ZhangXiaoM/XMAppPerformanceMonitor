@@ -21,6 +21,8 @@
 		0A3EEA7E20EC7E5200D32B88 /* XMFPSMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3EEA7A20EC7E5200D32B88 /* XMFPSMonitor.m */; };
 		0A3EEA8320EC7E6F00D32B88 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3EEA8020EC7E6E00D32B88 /* SecondViewController.m */; };
 		0A3EEA8420EC7E6F00D32B88 /* TestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3EEA8220EC7E6E00D32B88 /* TestTableViewCell.m */; };
+		0A3EEAA020ECB92B00D32B88 /* XMCrashMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3EEA9D20ECB92A00D32B88 /* XMCrashMonitor.m */; };
+		0A3EEAA120ECB92B00D32B88 /* XMException.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3EEA9E20ECB92A00D32B88 /* XMException.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,10 @@
 		0A3EEA8020EC7E6E00D32B88 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		0A3EEA8120EC7E6E00D32B88 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		0A3EEA8220EC7E6E00D32B88 /* TestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableViewCell.m; sourceTree = "<group>"; };
+		0A3EEA9C20ECB92A00D32B88 /* XMCrashMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMCrashMonitor.h; sourceTree = "<group>"; };
+		0A3EEA9D20ECB92A00D32B88 /* XMCrashMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMCrashMonitor.m; sourceTree = "<group>"; };
+		0A3EEA9E20ECB92A00D32B88 /* XMException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMException.m; sourceTree = "<group>"; };
+		0A3EEA9F20ECB92B00D32B88 /* XMException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMException.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +125,7 @@
 		0A3EEA3D20EC7D8700D32B88 /* XMAppPerformanceMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				0A3EEA8920EC990E00D32B88 /* XMCrashMonitor */,
 				0A3EEA8520EC7EA500D32B88 /* XMMonitorTool */,
 				0A3EEA7220EC7E5200D32B88 /* XMPerformanceMonitor */,
 				0A3EEA3E20EC7D8700D32B88 /* AppDelegate.h */,
@@ -176,6 +183,17 @@
 				0A3EEA7520EC7E5200D32B88 /* XMWeakTarget.m */,
 			);
 			path = XMMonitorTool;
+			sourceTree = "<group>";
+		};
+		0A3EEA8920EC990E00D32B88 /* XMCrashMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				0A3EEA9C20ECB92A00D32B88 /* XMCrashMonitor.h */,
+				0A3EEA9D20ECB92A00D32B88 /* XMCrashMonitor.m */,
+				0A3EEA9F20ECB92B00D32B88 /* XMException.h */,
+				0A3EEA9E20ECB92A00D32B88 /* XMException.m */,
+			);
+			path = XMCrashMonitor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,12 +329,14 @@
 				0A3EEA7B20EC7E5200D32B88 /* XMWeakTarget.m in Sources */,
 				0A3EEA4320EC7D8800D32B88 /* ViewController.m in Sources */,
 				0A3EEA7C20EC7E5200D32B88 /* XMCPUMonitor.m in Sources */,
+				0A3EEAA120ECB92B00D32B88 /* XMException.m in Sources */,
 				0A3EEA4E20EC7D9000D32B88 /* main.m in Sources */,
 				0A3EEA8320EC7E6F00D32B88 /* SecondViewController.m in Sources */,
 				0A3EEA4020EC7D8800D32B88 /* AppDelegate.m in Sources */,
 				0A3EEA7D20EC7E5200D32B88 /* XMMemoryMonitor.m in Sources */,
 				0A3EEA8420EC7E6F00D32B88 /* TestTableViewCell.m in Sources */,
 				0A3EEA7E20EC7E5200D32B88 /* XMFPSMonitor.m in Sources */,
+				0A3EEAA020ECB92B00D32B88 /* XMCrashMonitor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
