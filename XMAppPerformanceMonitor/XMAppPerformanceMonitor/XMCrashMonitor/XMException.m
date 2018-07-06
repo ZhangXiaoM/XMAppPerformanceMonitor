@@ -11,7 +11,7 @@
 @implementation XMException
 
 - (NSString *)description {
-    return [NSString stringWithFormat: @"Error: %@\nReson: %@\n%@\nCrash time: %@\n\nCall Stack: \n%@", self.name, self.reason, self.appVersion, self.time, self.callStack];
+    return [NSString stringWithFormat: @"Error: %@\nReson: %@\n%@\nCrash time: %@\n\nCall Stack: \n%@", self.name, self.reason, self.appInfo, self.time, self.callStack];
 }
 
 @end

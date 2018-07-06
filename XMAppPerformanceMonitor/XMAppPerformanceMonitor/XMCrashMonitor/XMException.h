@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XMAppInfo.h"
 
-@interface XMException : NSObject
+@interface XMException : XMAppInfo
+
+@property (nonatomic, assign) NSInteger ID;
 
 @property (nonatomic, copy) NSString * name;
 @property (nonatomic, copy) NSString * reason;
 @property (nonatomic, copy) NSString * callStack;
 @property (nonatomic, copy) NSString * time;
-@property (nonatomic, copy) NSString * appVersion;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "XMFPSMonitor.h"
 #import "XMWeakTarget.h"
+#import "XMMonitorDBManager.h"
+#import "XMPerformanceModel.h"
 
 @interface XMFPSMonitor()
 
@@ -61,8 +63,14 @@ static dispatch_queue_t sharedQueue() {
         strongSelf.count ++;
         NSTimeInterval delta = link.timestamp - strongSelf.lastTamp;
         if (delta < 1) return;
-        double fps = strongSelf.count / delta;
-        NSLog(@"FPS: %f",fps);
+        int fps = (int)round(strongSelf.count / delta);
+        @autoreleasepool {
+//            if (fps < 55) {
+            XMPerformanceModel *model = [XMPerformanceModel new];
+            model.value = fps;
+            [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeFPS obj:model];
+//            }
+        }
         strongSelf.lastTamp = link.timestamp;
         strongSelf.count = 0;
     });

@@ -13,6 +13,9 @@
 #include <mach/task.h>
 #include <mach/mach_init.h>
 
+#import "XMPerformanceModel.h"
+#import "XMMonitorDBManager.h"
+
 #define MEMORY_SIZE_PER_MB (1024 * 1024)
 
 typedef struct XMMemoryUsage {
@@ -87,7 +90,14 @@ static dispatch_queue_t sharedQueue() {
 
 - (void)tick:(NSTimer *)sender {
     XMMemoryUsage usage = memoryUsage();
-    NSLog(@"Memory usage:%ld MB, total:%ld MB, ratio:%f", (long)round(usage.hasUsage), (long)round(usage.total), usage.ratio);
+    @autoreleasepool {
+//        if (usage.hasUsage > 45) {
+        XMPerformanceModel *model = [XMPerformanceModel new];
+        model.value = usage.hasUsage;
+        [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeMemory obj:model];
+//        }
+    }
+//    NSLog(@"Memory usage:%ld MB, total:%ld MB, ratio:%f", (long)round(usage.hasUsage), (long)round(usage.total), usage.ratio);
 }
 
 XMMemoryUsage memoryUsage() {

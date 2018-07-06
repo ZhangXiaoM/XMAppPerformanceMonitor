@@ -9,6 +9,7 @@
 #import "XMCrashMonitor.h"
 #import "XMException.h"
 #import <UIKit/UIKit.h>
+#import "XMMonitorDBManager.h"
 
 @implementation XMCrashMonitor
 
@@ -21,7 +22,7 @@
     return sharedMonitor;
 }
 
-static inline NSString * signal_name(int sigal) {
+static inline NSString *signal_name(int sigal) {
     
     switch (sigal) {
         case SIGILL:
@@ -47,7 +48,7 @@ static inline NSString * signal_name(int sigal) {
     }
 }
 
-static inline NSString * signal_reson(int signal) {
+static inline NSString *signal_reson(int signal) {
     switch (signal) {
         case SIGILL:
             // 无效指令
@@ -108,7 +109,11 @@ void catch_exception_handle(NSException *exception) {
     fmt.dateFormat = @"yyyy-HH-dd HH:mm:ss";
     exc.time = [fmt stringFromDate:[NSDate date]];
     
-    NSLog(@"%@", [exc description]);
+    [[XMMonitorDBManager sharedManager] deleteAllRecordWithType:XMAppMonitorDBTypeException];
+    [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeException obj:exc];
+    NSArray *arr = [[XMMonitorDBManager sharedManager] selectAllRecordWithType:XMAppMonitorDBTypeException];
+    
+    NSLog(@"%ld", arr.count);
 }
 
 

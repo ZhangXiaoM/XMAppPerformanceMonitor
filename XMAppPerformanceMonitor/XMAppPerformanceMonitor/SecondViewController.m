@@ -27,10 +27,10 @@
     self.table.delegate = self;
     self.table.dataSource = self;
     [self.view addSubview:self.table];
-
-//    [[XMFPSMonitor sharedMonitor] startMonitor];
-//    [[XMCPUMonitor sharedMonitor] startMonitor];
-//    [[XMMemoryMonitor sharedMonitor] startMonitor];
+//    [[NSMutableArray array] addObject:nil];
+    [[XMFPSMonitor sharedMonitor] startMonitor];
+    [[XMCPUMonitor sharedMonitor] startMonitor];
+    [[XMMemoryMonitor sharedMonitor] startMonitor];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -54,7 +54,7 @@
     if (!cell) {
         cell = [[TestTableViewCell alloc] initWithStyle:0 reuseIdentifier:@"cell"];
     }
-    
+    // 模拟主线程繁忙
     for (int i = 0; i < 10000000; ++i) {
         
     }

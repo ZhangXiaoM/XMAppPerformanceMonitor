@@ -7,19 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XMAppInfo.h"
 
-@interface XMCPUModel : NSObject
-@property (nonatomic, assign) NSInteger cpuUsage;
-@end
+typedef NS_ENUM(NSUInteger, XMPerformanceType) {
+    XMPerformanceTypeFPS,
+    XMPerformanceTypeCPU,
+    XMPerformanceTypeMemory
+};
 
-@interface XMFPSModel : NSObject
-@property (nonatomic, assign) NSInteger fps;
-@end
+//@interface XMCPUModel : XMAppInfo
+//@property (nonatomic, assign) NSInteger cpuUsage;
+//@end
+//
+//@interface XMFPSModel : XMAppInfo
+//@property (nonatomic, assign) NSInteger fps;
+//@end
+//
+//@interface XMMemoryModel : XMAppInfo
+//@property (nonatomic, assign) NSInteger memoryUsage;
+//@end
 
-@interface XMMemoryModel : NSObject
-@property (nonatomic, assign) NSInteger memoryUsage;
-@end
-
-@interface XMPerformanceModel : NSObject
-
+@interface XMPerformanceModel : XMAppInfo
+@property (nonatomic, assign) NSInteger ID;
+@property (nonatomic, assign) XMPerformanceType type;
+@property (nonatomic, assign) NSInteger value;
 @end

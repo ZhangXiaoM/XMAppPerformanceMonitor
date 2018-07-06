@@ -14,6 +14,8 @@
 @property (nonatomic, copy) NSString *device;
 @property (nonatomic, copy) NSString *system;
 
+@property (nonatomic, copy) NSString *appInfo;
+
 + (NSString *)appInfo;
 
 @end
