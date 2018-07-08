@@ -97,7 +97,7 @@ static dispatch_queue_t sharedQueue() {
         [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeMemory obj:model];
 //        }
     }
-//    NSLog(@"Memory usage:%ld MB, total:%ld MB, ratio:%f", (long)round(usage.hasUsage), (long)round(usage.total), usage.ratio);
+    NSLog(@"Memory usage:%ld MB, total:%ld MB, ratio:%f", (long)round(usage.hasUsage), (long)round(usage.total), usage.ratio);
 }
 
 XMMemoryUsage memoryUsage() {

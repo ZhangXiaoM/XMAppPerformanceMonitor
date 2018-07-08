@@ -44,7 +44,7 @@ static NSString *const kMonitorDBExceptionTableName = @"XMExceptionTable";
 static sqlite3 *_shared_db = nil;
 
 @interface XMMonitorDBManager()
-@property (nonatomic, strong) NSLock *lock;
+@property (nonatomic, assign) BOOL hasDBOpened;
 @end
 
 @implementation XMMonitorDBManager {
@@ -82,17 +82,22 @@ static inline const char *shared_db_path() {
 
 - (BOOL)openDB {
     //打开数据库文件,如果为nil 则会自动创建一个
+    if (self.hasDBOpened) {
+        return YES;
+    }
+    pthread_mutex_lock(&_mutex);
     int result = sqlite3_open(shared_db_path(), &_shared_db);
     result == SQLITE_OK? NSLog(@"打开数据库成功！"): NSLog(@"打开数据库失败！");
+    self.hasDBOpened = result == SQLITE_OK;
+    pthread_mutex_unlock(&_mutex);
     return result == SQLITE_OK;
 }
 
 - (BOOL)closeDB {
     //关闭数据库
-//    pthread_mutex_lock(&_mutex);
     int result = sqlite3_close(_shared_db);
+    self.hasDBOpened = result != SQLITE_OK;
     result == SQLITE_OK? NSLog(@"关闭数据库成功！"): NSLog(@"关闭数据库失败！");
-//    pthread_mutex_unlock(&_mutex);
     return result == SQLITE_OK;
 }
 
@@ -102,18 +107,18 @@ static inline const char *shared_db_path() {
         NSLog(@"sql语句不合法");
         return;
     }
-    pthread_mutex_lock(&_mutex);
+    
     if (![self openDB]) {
         NSLog(@"打开数据库失败");
         return;
     }
     
+    pthread_mutex_lock(&_mutex);
     // 错误信息
     char *errmsg = NULL;
     // 执行语句，参数1：数据库，参数2：sql语句，参数3：回调函数，参数4：回调函数里使用的指针，参数5：错误信息
     int result = sqlite3_exec(_shared_db, sql.UTF8String, NULL, NULL, &errmsg);
     result == SQLITE_OK? NSLog(@"%@", sMsg) :NSLog(@"%@\n error:%c", fMsg, *errmsg);
-    [self closeDB];
     pthread_mutex_unlock(&_mutex);
 }
 
@@ -257,7 +262,6 @@ static inline const char *shared_db_path() {
     // 释放遍历指针
     sqlite3_finalize(stmt);
     pthread_mutex_unlock(&_mutex);
-    [self closeDB];
     return [result copy];
 }
 
@@ -307,6 +311,7 @@ XMException *handle_exceptin_selected_data(sqlite3_stmt *stmt) {
 }
 
 - (void)dealloc {
+    [self closeDB];
     pthread_mutex_destroy(&_mutex);
 }
 

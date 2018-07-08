@@ -70,6 +70,7 @@ static dispatch_queue_t sharedQueue() {
             model.value = fps;
             [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeFPS obj:model];
 //            }
+            NSLog(@"%d",fps);
         }
         strongSelf.lastTamp = link.timestamp;
         strongSelf.count = 0;
