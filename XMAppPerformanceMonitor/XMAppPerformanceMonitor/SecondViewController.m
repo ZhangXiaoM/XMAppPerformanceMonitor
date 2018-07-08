@@ -15,7 +15,6 @@
 @interface SecondViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *table;
-
 @end
 
 @implementation SecondViewController
@@ -27,6 +26,7 @@
     self.table.delegate = self;
     self.table.dataSource = self;
     [self.view addSubview:self.table];
+    
 //    [[NSMutableArray array] addObject:nil];
     [[XMFPSMonitor sharedMonitor] startMonitor];
     [[XMCPUMonitor sharedMonitor] startMonitor];
@@ -55,9 +55,7 @@
         cell = [[TestTableViewCell alloc] initWithStyle:0 reuseIdentifier:@"cell"];
     }
     // 模拟主线程繁忙
-    for (int i = 0; i < 10000000; ++i) {
-        
-    }
+    for (int i = 0; i < 10000000; ++i) {}
     
     cell.lab.text = [NSString stringWithFormat:@"%ld row", (long)indexPath.row];
     return cell;
