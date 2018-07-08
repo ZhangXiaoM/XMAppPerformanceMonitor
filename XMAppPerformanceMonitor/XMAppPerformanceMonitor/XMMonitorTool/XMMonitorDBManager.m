@@ -13,8 +13,6 @@
 #import <sqlite3.h>
 #include <pthread.h>
 
-#warning 加锁的问题还没处理好
-
 // 数据库名字
 static NSString *const kMonitorDBName = @"app_monitor.sqlite";
 #pragma mark - 建表sql指令
