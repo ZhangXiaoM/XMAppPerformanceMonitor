@@ -15,18 +15,6 @@ typedef NS_ENUM(NSUInteger, XMPerformanceType) {
     XMPerformanceTypeMemory
 };
 
-//@interface XMCPUModel : XMAppInfo
-//@property (nonatomic, assign) NSInteger cpuUsage;
-//@end
-//
-//@interface XMFPSModel : XMAppInfo
-//@property (nonatomic, assign) NSInteger fps;
-//@end
-//
-//@interface XMMemoryModel : XMAppInfo
-//@property (nonatomic, assign) NSInteger memoryUsage;
-//@end
-
 @interface XMPerformanceModel : XMAppInfo
 @property (nonatomic, assign) NSInteger ID;
 @property (nonatomic, assign) XMPerformanceType type;

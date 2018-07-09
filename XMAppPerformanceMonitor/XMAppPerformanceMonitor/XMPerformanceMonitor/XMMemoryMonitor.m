@@ -42,7 +42,7 @@ typedef struct XMMemoryUsage {
  * 监听整个 APP 生命周期的内存情况
  * 用一个常驻内存的共享队列来处理，
  * 内存的计算和处理，以及定时器都是常驻线程处理，不会阻塞主线程，
- * 也不好影响 APP 性能
+ * 也不会影响 APP 性能
  *********************************************/
 
 static dispatch_queue_t sharedQueue() {
@@ -90,13 +90,11 @@ static dispatch_queue_t sharedQueue() {
 
 - (void)tick:(NSTimer *)sender {
     XMMemoryUsage usage = memoryUsage();
-    @autoreleasepool {
 //        if (usage.hasUsage > 45) {
-        XMPerformanceModel *model = [XMPerformanceModel new];
-        model.value = usage.hasUsage;
-        [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeMemory obj:model];
+    XMPerformanceModel *model = [XMPerformanceModel new];
+    model.value = usage.hasUsage;
+    [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeMemory obj:model];
 //        }
-    }
     NSLog(@"Memory usage:%ld MB, total:%ld MB, ratio:%f", (long)round(usage.hasUsage), (long)round(usage.total), usage.ratio);
 }
 

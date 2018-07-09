@@ -8,18 +8,6 @@
 
 #import "XMPerformanceModel.h"
 
-//@implementation XMCPUModel
-//
-//@end
-//
-//@implementation XMFPSModel
-//
-//@end
-//
-//@implementation XMMemoryModel
-//
-//@end
-
 @implementation XMPerformanceModel
 
 @end

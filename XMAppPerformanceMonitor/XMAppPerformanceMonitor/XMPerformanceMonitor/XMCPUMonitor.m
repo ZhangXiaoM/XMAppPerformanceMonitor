@@ -77,14 +77,11 @@ static dispatch_queue_t sharedQueue() {
 - (void)tick:(NSTimer *)sender {
     int cpu = (int)round(cpuUsage());
 //    NSLog(@"CPU Usage: %d", (int)round(cpuUsage()));
-    @autoreleasepool {
 //        if (cpu > 80) {
-        XMPerformanceModel *model = [XMPerformanceModel new];
-        model.value = cpu;
-        [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeCPU obj:model];
+    XMPerformanceModel *model = [XMPerformanceModel new];
+    model.value = cpu;
+    [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeCPU obj:model];
 //        }
-    }
-//    NSLog(@"%@",[NSThread currentThread]);
 }
 
 float cpuUsage() {

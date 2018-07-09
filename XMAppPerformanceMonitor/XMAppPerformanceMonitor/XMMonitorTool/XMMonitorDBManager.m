@@ -253,8 +253,10 @@ static inline const char *shared_db_path() {
     if (sqlite3_prepare_v2(_shared_db, sql.UTF8String, -1, &stmt, NULL) == SQLITE_OK) {
         // 遍历输出
         while (sqlite3_step(stmt) == SQLITE_ROW) {
-            id obj = handle_selected_data(type, stmt);
-            !obj?: [result addObject:obj];
+            @autoreleasepool {
+                id obj = handle_selected_data(type, stmt);
+                !obj?: [result addObject:obj];
+            }
         }
     }
     // 释放遍历指针

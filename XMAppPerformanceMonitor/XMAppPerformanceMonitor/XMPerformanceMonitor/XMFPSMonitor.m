@@ -64,14 +64,12 @@ static dispatch_queue_t sharedQueue() {
         NSTimeInterval delta = link.timestamp - strongSelf.lastTamp;
         if (delta < 1) return;
         int fps = (int)round(strongSelf.count / delta);
-        @autoreleasepool {
-//            if (fps < 55) {
-            XMPerformanceModel *model = [XMPerformanceModel new];
-            model.value = fps;
-            [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeFPS obj:model];
-//            }
-            NSLog(@"%d",fps);
-        }
+//        if (fps < 55) {
+        XMPerformanceModel *model = [XMPerformanceModel new];
+        model.value = fps;
+        [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeFPS obj:model];
+//        }
+        NSLog(@"%d",fps);
         strongSelf.lastTamp = link.timestamp;
         strongSelf.count = 0;
     });
