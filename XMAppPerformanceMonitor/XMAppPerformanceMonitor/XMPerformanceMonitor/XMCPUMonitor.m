@@ -75,7 +75,7 @@ static dispatch_queue_t sharedQueue() {
 }
 
 - (void)tick:(NSTimer *)sender {
-    int cpu = (int)round(cpuUsage());
+    int cpu = (int)round(cpu_usage());
 //    NSLog(@"CPU Usage: %d", (int)round(cpuUsage()));
 //        if (cpu > 80) {
     XMPerformanceModel *model = [XMPerformanceModel new];
@@ -84,8 +84,8 @@ static dispatch_queue_t sharedQueue() {
 //        }
 }
 
-float cpuUsage() {
-    double usageRatio = 0;
+float cpu_usage() {
+    double usage_ratio = 0;
     thread_info_data_t thinfo;
     thread_act_array_t threads;
     // 由内核提供的该进程内线程的信息，包括：运行时间、运行状态、CPU 用量、睡眠时间等
@@ -98,13 +98,13 @@ float cpuUsage() {
             if (thread_info(threads[idx], THREAD_BASIC_INFO, (thread_info_t)thinfo, &thread_info_count) == KERN_SUCCESS) {
                 basic_info_t = (thread_basic_info_t)thinfo;
                 if (!(basic_info_t->flags & TH_FLAGS_IDLE)) {
-                    usageRatio += basic_info_t->cpu_usage / (double)TH_USAGE_SCALE;
+                    usage_ratio += basic_info_t->cpu_usage / (double)TH_USAGE_SCALE;
                 }
             }
         }
         assert(vm_deallocate(mach_task_self(), (vm_address_t)threads, count * sizeof(thread_t)) == KERN_SUCCESS);
     }
-    return usageRatio * 100.;
+    return usage_ratio * 100.;
 }
 
 #pragma clang diagnostic pop

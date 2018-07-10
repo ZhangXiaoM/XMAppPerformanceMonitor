@@ -50,28 +50,26 @@ static dispatch_queue_t sharedQueue() {
 
 - (void)tick:(CADisplayLink *)link {
     
-    __weak typeof(self) weakSelf = self;
     // 计算在子线程执行，减少主线程拥塞
     dispatch_async(sharedQueue(), ^{
         // 主线程不会访问和修改临界区内容
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.lastTamp == 0) {
-            strongSelf.lastTamp = link.timestamp;
+        if (self.lastTamp == 0) {
+            self.lastTamp = link.timestamp;
             return;
         }
         
-        strongSelf.count ++;
-        NSTimeInterval delta = link.timestamp - strongSelf.lastTamp;
+        self.count ++;
+        NSTimeInterval delta = link.timestamp - self.lastTamp;
         if (delta < 1) return;
-        int fps = (int)round(strongSelf.count / delta);
+        int fps = (int)round(self.count / delta);
 //        if (fps < 55) {
         XMPerformanceModel *model = [XMPerformanceModel new];
         model.value = fps;
         [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeFPS obj:model];
 //        }
         NSLog(@"%d",fps);
-        strongSelf.lastTamp = link.timestamp;
-        strongSelf.count = 0;
+        self.lastTamp = link.timestamp;
+        self.count = 0;
     });
 }
 

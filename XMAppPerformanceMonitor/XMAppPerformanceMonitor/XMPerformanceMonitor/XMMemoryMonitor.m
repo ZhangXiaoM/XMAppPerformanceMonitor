@@ -20,7 +20,7 @@
 
 typedef struct XMMemoryUsage {
     
-    double hasUsage;
+    double has_usage;
     double total;
     double ratio;
 } XMMemoryUsage;
@@ -89,23 +89,23 @@ static dispatch_queue_t sharedQueue() {
 }
 
 - (void)tick:(NSTimer *)sender {
-    XMMemoryUsage usage = memoryUsage();
+    XMMemoryUsage usage = memory_usage();
 //        if (usage.hasUsage > 45) {
     XMPerformanceModel *model = [XMPerformanceModel new];
-    model.value = usage.hasUsage;
+    model.value = usage.has_usage;
     [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeMemory obj:model];
 //        }
-    NSLog(@"Memory usage:%ld MB, total:%ld MB, ratio:%f", (long)round(usage.hasUsage), (long)round(usage.total), usage.ratio);
+    NSLog(@"Memory usage:%ld MB, total:%ld MB, ratio:%f", (long)round(usage.has_usage), (long)round(usage.total), usage.ratio);
 }
 
-XMMemoryUsage memoryUsage() {
+XMMemoryUsage memory_usage() {
     // 由内核提供的关于该进程的内存信息，包括虚拟内存，常驻内存，物理内存，最大常驻内存等
     struct mach_task_basic_info info;
     mach_msg_type_number_t count = sizeof(info) / sizeof(integer_t);
     if (task_info(mach_task_self(), MACH_TASK_BASIC_INFO, (task_info_t)&info, &count) == KERN_SUCCESS) {
         
         XMMemoryUsage usage;
-        usage.hasUsage = info.resident_size / MEMORY_SIZE_PER_MB;
+        usage.has_usage = info.resident_size / MEMORY_SIZE_PER_MB;
         usage.total = [NSProcessInfo processInfo].physicalMemory / MEMORY_SIZE_PER_MB;
         usage.ratio = (double)info.resident_size / (double)[NSProcessInfo processInfo].physicalMemory * 100;
         return usage;

@@ -79,7 +79,7 @@ static inline const char *shared_db_path() {
 }
 
 - (BOOL)openDB {
-    //打开数据库文件,如果为nil 则会自动创建一个
+    // 打开数据库文件,如果为nil 则会自动创建一个
     if (self.hasDBOpened) {
         return YES;
     }
@@ -92,7 +92,7 @@ static inline const char *shared_db_path() {
 }
 
 - (BOOL)closeDB {
-    //关闭数据库
+    // 关闭数据库
     int result = sqlite3_close(_shared_db);
     self.hasDBOpened = result != SQLITE_OK;
     result == SQLITE_OK? NSLog(@"关闭数据库成功！"): NSLog(@"关闭数据库失败！");
