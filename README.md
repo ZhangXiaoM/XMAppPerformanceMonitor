@@ -30,3 +30,14 @@ NOTE：本项目所有的 c 函数，c 变量采用下划线分割的命名规�
 }
 ```
 
+采用异步绘制的方式将监控到的数据实时显示：
+
+```objc
+XMAsyncLabel *fpsLab = [XMAsyncLabel showInWindowWithframe:CGRectMake(30, 50, 100, 30)];
+[XMFPSMonitor sharedMonitor].display = ^(NSString *text) {
+    // 子线程完成绘制，不会阻塞主线程
+    fpsLab.text = text;
+};
+
+效果：
+https://github.com/ZhangXiaoM/XMAppPerformanceMonitor/blob/master/display_demo/foo.gif
