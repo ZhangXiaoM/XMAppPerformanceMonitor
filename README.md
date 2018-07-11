@@ -38,6 +38,8 @@ XMAsyncLabel *fpsLab = [XMAsyncLabel showInWindowWithframe:CGRectMake(30, 50, 10
     // 子线程完成绘制，不会阻塞主线程
     fpsLab.text = text;
 };
+```
 
 效果：
 ![](https://raw.githubusercontent.com/ZhangXiaoM/XMAppPerformanceMonitor/master/display_demo/foo.gif)
+
