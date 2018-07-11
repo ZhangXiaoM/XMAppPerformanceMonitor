@@ -11,6 +11,7 @@
 #import "XMFPSMonitor.h"
 #import "XMCPUMonitor.h"
 #import "XMMemoryMonitor.h"
+#import "XMAsyncLabel.h"
 
 @interface SecondViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -27,10 +28,23 @@
     self.table.dataSource = self;
     [self.view addSubview:self.table];
     
-//    [[NSMutableArray array] addObject:nil];
+    XMAsyncLabel *fpsLab = [XMAsyncLabel showInWindowWithframe:CGRectMake(30, 50, 100, 30)];
+    XMAsyncLabel *cpuLab = [XMAsyncLabel showInWindowWithframe:CGRectMake(130, 50, 100, 30)];
+    XMAsyncLabel *memoryLab = [XMAsyncLabel showInWindowWithframe:CGRectMake(230, 50, 100, 30)];
     [[XMFPSMonitor sharedMonitor] startMonitor];
+    [XMFPSMonitor sharedMonitor].display = ^(NSString *text) {
+        fpsLab.text = text;
+    };
+    
     [[XMCPUMonitor sharedMonitor] startMonitor];
+    [XMCPUMonitor sharedMonitor].display = ^(NSString *text) {
+        cpuLab.text = text;
+    };
+    
     [[XMMemoryMonitor sharedMonitor] startMonitor];
+    [XMMemoryMonitor sharedMonitor].display = ^(NSString *text) {
+        memoryLab.text = text;
+    };
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

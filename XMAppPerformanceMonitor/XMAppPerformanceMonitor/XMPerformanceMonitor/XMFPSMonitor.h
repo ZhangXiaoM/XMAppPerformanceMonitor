@@ -12,6 +12,8 @@
 @interface XMFPSMonitor : NSObject
 @property (nonatomic, strong) CADisplayLink *link;
 
+@property (nonatomic, copy) void(^display)(NSString *text);
+
 + (XMFPSMonitor *)sharedMonitor;
 - (void)startMonitor;
 - (void)stopMonitor;

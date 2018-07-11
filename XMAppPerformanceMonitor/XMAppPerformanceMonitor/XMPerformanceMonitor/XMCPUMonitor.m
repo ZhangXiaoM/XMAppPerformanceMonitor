@@ -34,7 +34,7 @@ static dispatch_queue_t sharedQueue() {
     static dispatch_queue_t queue = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        queue = dispatch_queue_create("CPUMonitorQueue", DISPATCH_QUEUE_SERIAL);
+        queue = dispatch_queue_create("com.xm.monitor.cpuQueue", DISPATCH_QUEUE_SERIAL);
     });
     return queue;
 }
@@ -81,6 +81,11 @@ static dispatch_queue_t sharedQueue() {
     XMPerformanceModel *model = [XMPerformanceModel new];
     model.value = cpu;
     [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeCPU obj:model];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.display) {
+            self.display([NSString stringWithFormat:@"CPU:%d", cpu]);
+        }
+    });
 //        }
 }
 

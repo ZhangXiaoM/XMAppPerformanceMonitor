@@ -49,7 +49,7 @@ static dispatch_queue_t sharedQueue() {
     static dispatch_queue_t queue = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        queue = dispatch_queue_create("MemoryMonitorQueue", DISPATCH_QUEUE_SERIAL);
+        queue = dispatch_queue_create("com.xm.monitor.memeoryQueue", DISPATCH_QUEUE_SERIAL);
     });
     return queue;
 }
@@ -89,13 +89,18 @@ static dispatch_queue_t sharedQueue() {
 }
 
 - (void)tick:(NSTimer *)sender {
-    XMMemoryUsage usage = memory_usage();
-//        if (usage.hasUsage > 45) {
+    XMMemoryUsage memory = memory_usage();
+    NSInteger usage = round(memory.has_usage);
     XMPerformanceModel *model = [XMPerformanceModel new];
-    model.value = usage.has_usage;
+    model.value = usage;
     [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeMemory obj:model];
-//        }
-    NSLog(@"Memory usage:%ld MB, total:%ld MB, ratio:%f", (long)round(usage.has_usage), (long)round(usage.total), usage.ratio);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.display) {
+            self.display([NSString stringWithFormat:@"Memory:%ld", usage]);
+        }
+    });
+    //    NSLog(@"Memory usage:%ld MB, total:%ld MB, ratio:%f", (long)round(usage.has_usage), (long)round(usage.total), usage.ratio);
 }
 
 XMMemoryUsage memory_usage() {

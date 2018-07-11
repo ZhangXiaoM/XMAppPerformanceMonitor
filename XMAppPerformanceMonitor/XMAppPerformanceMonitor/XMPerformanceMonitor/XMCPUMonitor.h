@@ -10,6 +10,8 @@
 
 @interface XMCPUMonitor : NSObject
 
+@property (nonatomic, copy) void(^display)(NSString *text);
+
 + (XMCPUMonitor *)sharedMonitor;
 
 - (void)startMonitor;

@@ -26,6 +26,7 @@
 		0A3EEABF20EE274A00D32B88 /* XMPerformanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3EEABE20EE274A00D32B88 /* XMPerformanceModel.m */; };
 		0A3EEAC220EE283000D32B88 /* XMMonitorDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3EEAC120EE283000D32B88 /* XMMonitorDBManager.m */; };
 		0A3EEAC520EE28B800D32B88 /* XMAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3EEAC320EE28B700D32B88 /* XMAppInfo.m */; };
+		0AF1DB4A20F5F4C5008F2896 /* XMAsyncLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1DB4920F5F4C5008F2896 /* XMAsyncLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		0A3EEAC120EE283000D32B88 /* XMMonitorDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMMonitorDBManager.m; sourceTree = "<group>"; };
 		0A3EEAC320EE28B700D32B88 /* XMAppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMAppInfo.m; sourceTree = "<group>"; };
 		0A3EEAC420EE28B700D32B88 /* XMAppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMAppInfo.h; sourceTree = "<group>"; };
+		0AF1DB4820F5F4C5008F2896 /* XMAsyncLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMAsyncLabel.h; sourceTree = "<group>"; };
+		0AF1DB4920F5F4C5008F2896 /* XMAsyncLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XMAsyncLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +199,8 @@
 				0A3EEA7520EC7E5200D32B88 /* XMWeakTarget.m */,
 				0A3EEAC020EE283000D32B88 /* XMMonitorDBManager.h */,
 				0A3EEAC120EE283000D32B88 /* XMMonitorDBManager.m */,
+				0AF1DB4820F5F4C5008F2896 /* XMAsyncLabel.h */,
+				0AF1DB4920F5F4C5008F2896 /* XMAsyncLabel.m */,
 			);
 			path = XMMonitorTool;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 				0A3EEAA120ECB92B00D32B88 /* XMException.m in Sources */,
 				0A3EEA4E20EC7D9000D32B88 /* main.m in Sources */,
 				0A3EEA8320EC7E6F00D32B88 /* SecondViewController.m in Sources */,
+				0AF1DB4A20F5F4C5008F2896 /* XMAsyncLabel.m in Sources */,
 				0A3EEA4020EC7D8800D32B88 /* AppDelegate.m in Sources */,
 				0A3EEA7D20EC7E5200D32B88 /* XMMemoryMonitor.m in Sources */,
 				0A3EEA8420EC7E6F00D32B88 /* TestTableViewCell.m in Sources */,
@@ -527,6 +533,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G95598R883;
 				INFOPLIST_FILE = XMAppPerformanceMonitor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -546,6 +553,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G95598R883;
 				INFOPLIST_FILE = XMAppPerformanceMonitor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

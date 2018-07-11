@@ -10,6 +10,8 @@
 
 @interface XMMemoryMonitor : NSObject
 
+@property (nonatomic, copy) void(^display)(NSString *text);
+
 + (XMMemoryMonitor *)sharedMonitor;
 - (void)startMonitor;
 - (void)stopMonitor;

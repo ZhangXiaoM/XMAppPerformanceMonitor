@@ -24,7 +24,7 @@ static dispatch_queue_t sharedQueue() {
     static dispatch_queue_t queue = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        queue = dispatch_queue_create("FPSMonitorQueue", DISPATCH_QUEUE_SERIAL);
+        queue = dispatch_queue_create("com.xm.monitor.fpsQueue", DISPATCH_QUEUE_SERIAL);
     });
     return queue;
 }
@@ -67,6 +67,12 @@ static dispatch_queue_t sharedQueue() {
         model.value = fps;
         [[XMMonitorDBManager sharedManager] insertWithType:XMAppMonitorDBTypeFPS obj:model];
 //        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.display) {
+                self.display([NSString stringWithFormat:@"FPS:%d", fps]);
+            }
+        });
+        
         NSLog(@"%d",fps);
         self.lastTamp = link.timestamp;
         self.count = 0;
