@@ -97,7 +97,7 @@ static dispatch_queue_t sharedQueue() {
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.display) {
-            self.display([NSString stringWithFormat:@"Memory:%ld", usage]);
+            self.display([NSString stringWithFormat:@"Memory:%ld", (long)usage]);
         }
     });
     //    NSLog(@"Memory usage:%ld MB, total:%ld MB, ratio:%f", (long)round(usage.has_usage), (long)round(usage.total), usage.ratio);

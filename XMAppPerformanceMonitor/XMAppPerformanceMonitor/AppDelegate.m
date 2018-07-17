@@ -11,6 +11,8 @@
 #import "XMFPSMonitor.h"
 #import "XMMemoryMonitor.h"
 #import "XMCrashMonitor.h"
+#import "XMAsyncLabel.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -26,6 +28,32 @@
 //    [[XMCPUMonitor sharedMonitor] startMonitor];
 //    [[XMMemoryMonitor sharedMonitor] startMonitor];
 //    [[XMCrashMonitor sharedMonitor] startMonitor];
+    
+    self.window  = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    ViewController *v = [ViewController new];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:v];
+    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
+    
+    XMAsyncLabel *fpsLab = [XMAsyncLabel showInWindowWithframe:CGRectMake(30, 50, 100, 30)];
+    XMAsyncLabel *cpuLab = [XMAsyncLabel showInWindowWithframe:CGRectMake(130, 50, 100, 30)];
+    XMAsyncLabel *memoryLab = [XMAsyncLabel showInWindowWithframe:CGRectMake(230, 50, 100, 30)];
+    [[XMFPSMonitor sharedMonitor] startMonitor];
+    [XMFPSMonitor sharedMonitor].display = ^(NSString *text) {
+        fpsLab.text = text;
+    };
+    
+    [[XMCPUMonitor sharedMonitor] startMonitor];
+    [XMCPUMonitor sharedMonitor].display = ^(NSString *text) {
+        cpuLab.text = text;
+    };
+    
+    [[XMMemoryMonitor sharedMonitor] startMonitor];
+    [XMMemoryMonitor sharedMonitor].display = ^(NSString *text) {
+        memoryLab.text = text;
+    };
+    
     return YES;
 }
 

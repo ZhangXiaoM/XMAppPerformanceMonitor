@@ -22,11 +22,10 @@
 }
 
 + (instancetype)showInWindowWithframe:(CGRect)frame {
-    UIWindow *w = [UIApplication sharedApplication].keyWindow;
+    UIWindow *w = [UIApplication sharedApplication].delegate.window;
     XMAsyncLabel *lab = [[self class] showInView:w frame:frame];
     return lab;
 }
-
 
 - (void)setText:(NSString *)text {
     [self displayAttributedText:[[NSAttributedString alloc] initWithString:text attributes: @{ NSFontAttributeName:self.font, NSForegroundColorAttributeName:self.textColor, NSBackgroundColorAttributeName: self.backgroundColor }]];
