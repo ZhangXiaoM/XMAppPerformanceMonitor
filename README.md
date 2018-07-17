@@ -41,4 +41,7 @@ XMAsyncLabel *fpsLab = [XMAsyncLabel showInWindowWithframe:CGRectMake(30, 50, 10
 ```
 
 效果：
+
+
+
 ![](https://github.com/ZhangXiaoM/XMAppPerformanceMonitor/blob/master/display_demo/foo.gif?raw=true)
